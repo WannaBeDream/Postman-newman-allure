@@ -1,6 +1,6 @@
 # Postman + newman + github actions + allure (Simple store template)
 
-## Task steps / First task
+## Commands Overview
 1. Run `npm i`  to install node.js dependencies.
 2. Run `npm run tern-on-api` to run testing server locally on 3000 port.
 3. Run `npm run test` to run newman runner with `store.collection.json` through API on local server.
@@ -8,7 +8,7 @@
 5. Run `allure:clear` to clean up current folder.
 6. Run `report` to run generate the static report web-application folder and serve the report locally without prior installation.
 
-### Overview of local server testing
+### REST API Overview
 Routes `/products`, `/orders` and `/users`. Below is a table of supported operations with `products` as example resource. The same operations are also supports for `orders/` and `users/`.
 
 | VERB     |Route          | Input      | Output             |
@@ -19,7 +19,7 @@ Routes `/products`, `/orders` and `/users`. Below is a table of supported operat
 | PUT      | /products     | **object** | **Updated object** |
 | DELETE   | /products/:id | **e.g 3**  | **Deleted object** |
 
-Examples:
+Test examples overview:
 - Test pagination, by way like `http://localhost:3000/users?page=1&pageSize=2`. 
 - Test sorting, by way like `http://localhost:3000/users?sortOrder=ASC&sortKey=firstName`. You can sort an any resource response using query parameters sortOrder and sortKey.
 -  Test status code for REST API (200,400 and so on).
