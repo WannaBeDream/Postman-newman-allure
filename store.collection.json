@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9911c766-4b24-4dd9-aea8-e0dbe6f9897a",
+		"_postman_id": "8ba0e1e6-679f-4293-a1c3-bf0c156a992a",
 		"name": "store",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "18482517"
+		"_exporter_id": "18317683"
 	},
 	"item": [
 		{
@@ -535,55 +535,6 @@
 					"response": []
 				},
 				{
-					"name": "Update product with invalid ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"pm.test(\"Status code is 404\", function () {\r",
-									"    pm.response.to.have.status(404);\r",
-									"});\r",
-									"pm.test(\"Content-Type is present\", function () {\r",
-									"    pm.response.to.have.header(\"Content-Type\");\r",
-									"});\r",
-									"pm.test(\"Error message is displayed\", function () {\r",
-									"    pm.expect(pm.response.text()).to.include('Item not found')\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": {{invalidID}},\r\n    \"name\": \"{{name}}\",\r\n    \"price\": {{price}},\r\n    \"sku\": {{sku}},\r\n    \"description\": \"{{description}}\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/products",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"products"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Remove product by ID",
 					"event": [
 						{
@@ -624,7 +575,7 @@
 					"response": []
 				},
 				{
-					"name": "Get product by deleted ID",
+					"name": "Get product by ID / Negative",
 					"event": [
 						{
 							"listen": "test",
@@ -664,7 +615,7 @@
 					"response": []
 				},
 				{
-					"name": "Remove product by invalid ID",
+					"name": "Remove product by ID / Negative",
 					"event": [
 						{
 							"listen": "test",
@@ -674,7 +625,7 @@
 									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 									"});\r",
 									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
+									"    pm.response.to.have.status(404);\r",
 									"});\r",
 									"pm.test(\"Response body is empty\", function(){\r",
 									"pm.expect(pm.response.text()).to.be.empty\r",
@@ -702,106 +653,7 @@
 					"response": []
 				},
 				{
-					"name": "Create product with invalid value",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"pm.test(\"Status code is 400\", function () {\r",
-									"    pm.response.to.have.status(400);\r",
-									"});\r",
-									"pm.test(\"Content-Type is present\", function () {\r",
-									"    pm.response.to.have.header(\"Content-Type\");\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"price\": 8,\r\n    \"sku\": null,\r\n    \"description\": \"description\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/products",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"products"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create product with empty value",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"pm.test(\"Status code is 201\", function () {\r",
-									"    pm.response.to.have.status(201);\r",
-									"});\r",
-									"pm.test(\"Content-Type is present\", function () {\r",
-									"    pm.response.to.have.header(\"Content-Type\");\r",
-									"});\r",
-									"pm.test(\"Product is created with empty values\", () => {\r",
-									"    const jsonData = pm.response.json()\r",
-									"    pm.expect(jsonData.name).to.eql(\"\");\r",
-									"    pm.expect(jsonData.price).to.eql(\"\");\r",
-									"    pm.expect(jsonData.description).to.eql(\"\");\r",
-									"    pm.expect(jsonData.sku).to.eql(\"\")\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"\",\r\n    \"price\": \"\",\r\n    \"sku\": \"\",\r\n    \"description\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseUrl}}/products",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"products"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get product by invalid ID",
+					"name": "Get product by invalid ID / Negative",
 					"event": [
 						{
 							"listen": "test",
@@ -825,98 +677,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/products/1001",
+							"raw": "{{baseUrl}}/products/0",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"products",
-								"1001"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Check pagination with invalid params",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Response time is less than 200ms\", function () {\r",
-									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
-									"});\r",
-									"pm.test(\"Status code is 200\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test(\"Content-Type is present\", function () {\r",
-									"    pm.response.to.have.header(\"Content-Type\");\r",
-									"});\r",
-									"const schema = {\r",
-									"  \r",
-									"  \"type\": \"array\",\r",
-									"  \"items\": [\r",
-									"    {\r",
-									"      \"type\": \"object\",\r",
-									"      \"properties\": {\r",
-									"        \"id\": {\r",
-									"          \"type\": \"integer\"\r",
-									"        },\r",
-									"        \"name\": {\r",
-									"          \"type\": \"string\"\r",
-									"        },\r",
-									"        \"price\": {\r",
-									"          \"type\": \"integer\"\r",
-									"        },\r",
-									"        \"sku\": {\r",
-									"          \"type\": \"integer\"\r",
-									"        },\r",
-									"        \"description\": {\r",
-									"          \"type\": \"string\"\r",
-									"        }\r",
-									"      },\r",
-									"      \"required\": [\r",
-									"        \"id\",\r",
-									"        \"name\",\r",
-									"        \"price\",\r",
-									"        \"sku\",\r",
-									"        \"description\"\r",
-									"      ]\r",
-									"    }\r",
-									"  ]\r",
-									"}\r",
-									"pm.test(\"Schema is valid\", function(){\r",
-									"    pm.response.to.have.jsonSchema(schema);\r",
-									"})\r",
-									"pm.test(\"Response body is empty\", function(){\r",
-									"pm.expect(pm.response.json()).to.be.empty\r",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/products?page=0&pageSize=1",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"products"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "0"
-								},
-								{
-									"key": "pageSize",
-									"value": "1"
-								}
+								"0"
 							]
 						}
 					},
@@ -1126,6 +893,19 @@
 				},
 				{
 					"name": "Remove user by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
